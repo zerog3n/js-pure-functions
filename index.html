@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Pure Functions</title>
+</head>
+<body></body>
+<script src="index.js"></script>
+<script>
+// USE THIS HTML TO TEST FUNCTION CALL VARIATIONS...
+// TODO: implement jest test suites
+
+const testX = getPropertyKeyValue()
+const testY = getPropertyKeyValue({})
+const testZ = getPropertyKeyValue({}, '')
+
+const test1 = getPropertyKeyValue({one:{two:{three:1}}},       'one.two.three') // 1
+const test2 = getPropertyKeyValue({one:{two:{three:2}}},       'one.three.two') // undefined (key mismatch)
+const test3 = getPropertyKeyValue({one:{two:{three:"three"}}}, 'one.two.three') // "three"
+const test4 = getPropertyKeyValue(10,                          10)              // false (bad input parameter types)
+const test5 = getPropertyKeyValue(['one','two','three'],       1)               // "two" (array index value returned)
+const test6 = getPropertyKeyValue([
+    'N9C350B021801030',
+    'N9C350B021801031',
+    'N9C350B021801032',
+    'N9C350B021801033',
+    'N9C350B021801034',
+    'N9C350B021801035',
+    'N9C350B021801036',
+    'N9C350B021801037',
+    'N9C350B021801038',
+    'N9C350B021801039',
+    'N9C350B021801040',
+], 5) // "N9C350B021801035" (array index value returned)
+
+// test 7
+let obj = { one: { two: { three: 123 } } }
+let prop = getPropertyKeyValue(obj, 'one.two.three') // 123
+prop = prop * 2 // 246
+
+console.log(`test X -> output should be ?: ${testX}`)
+console.log(`test Y -> output should be ?: ${testY}`)
+console.log(`test Z -> output should be ?: ${testZ}`)
+
+console.log(`test 1 -> output should be 1: ${test1}`)
+console.log(`test 2 -> output should be 'undefined': ${test2}`)
+console.log(`test 3 -> output should be 'three': ${test3}`)
+console.log(`test 4 -> output should be 'false': ${test4}`)
+console.log(`test 5 -> output should be 'two': ${test5}`)
+console.log(`test 6 -> output should be 'N9C350B021801035': ${test6}`)
+
+const changed = obj.one.two.three == prop
+console.log(`test 7 -> was property changed via reference: ${changed}`, { obj: obj.one.two.three, prop })
+
+
+
+</script>
+</html>
